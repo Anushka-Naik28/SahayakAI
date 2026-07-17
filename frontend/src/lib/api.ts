@@ -1,5 +1,5 @@
 // SahayakAI REST API Client
-const BACKEND_URL = "http://localhost:8000/api";
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 // Simple local state store for standalone client mode
 let localUser: any = {
