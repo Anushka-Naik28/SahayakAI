@@ -9,7 +9,7 @@ export default function FloatingAssistant() {
   const { userId, language } = useApp();
   const [isOpen, setIsOpen] = useState(false);
   const [speechEnabled, setSpeechEnabled] = useState(false);
-  const [messages, setMessages] = useState<Array<{ sender: "user" | "ai"; text: str; date: string }>>([
+  const [messages, setMessages] = useState<Array<{ sender: "user" | "ai"; text: string; date: string }>>([
     {
       sender: "ai",
       text: "Namaste! I am SahayakAI, your Citizen Copilot. Ask me questions about schemes, documents, or check your eligibility criteria.",

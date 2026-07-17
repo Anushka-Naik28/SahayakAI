@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useApp } from "@/components/Providers";
 import { sahayakApi } from "@/lib/api";
 import { Sparkles, HelpCircle, CheckCircle, AlertTriangle, ArrowRight, RefreshCw, Sliders } from "lucide-react";
 
 export default function EligibilityCheckerPage() {
   const { userId } = useApp();
+  const router = useRouter();
   
   // Wizard steps: 1 = choose scheme & verify parameters, 2 = running analysis, 3 = show results
   const [wizardStep, setWizardStep] = useState(1);

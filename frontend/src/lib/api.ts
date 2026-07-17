@@ -558,5 +558,25 @@ export const sahayakApi = {
       
       return { message: "Mock Status updated" };
     }
+  },
+
+  async adminCreateScheme(payload: any): Promise<any> {
+    try {
+      const res = await fetch(`${BACKEND_URL}/admin/schemes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) return await res.json();
+      throw new Error();
+    } catch {
+      const schemeId = payload.name.toLowerCase().replace(/\s+/g, "-");
+      const newScheme = {
+        _id: schemeId,
+        ...payload
+      };
+      FALLBACK_SCHEMES.unshift(newScheme);
+      return { message: "Mock Scheme created successfully", scheme_id: schemeId };
+    }
   }
 };

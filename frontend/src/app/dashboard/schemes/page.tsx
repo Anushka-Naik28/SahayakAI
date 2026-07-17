@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useApp } from "@/components/Providers";
 import { sahayakApi } from "@/lib/api";
@@ -17,7 +17,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-export default function SchemesPage() {
+function SchemesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { userId } = useApp();
@@ -463,5 +463,17 @@ export default function SchemesPage() {
       </div>
 
     </div>
+  );
+}
+
+export default function SchemesPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex-grow p-8 text-center text-xs text-slate-400">
+        Loading welfare schemes...
+      </div>
+    }>
+      <SchemesContent />
+    </Suspense>
   );
 }

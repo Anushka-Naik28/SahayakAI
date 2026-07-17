@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useApp } from "@/components/Providers";
 import { sahayakApi } from "@/lib/api";
 import { KeyRound, Mail, User, ShieldAlert, ArrowRight, ShieldCheck } from "lucide-react";
 
-export default function AuthPage() {
+function AuthContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setUserId } = useApp();
@@ -403,5 +403,17 @@ export default function AuthPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+        <div className="text-sm text-slate-500">Loading authentication interface...</div>
+      </div>
+    }>
+      <AuthContent />
+    </Suspense>
   );
 }
